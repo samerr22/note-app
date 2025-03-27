@@ -8,10 +8,10 @@ const router = express.Router();
 router.post('/icreate', createnote);
 
 // Get all inventory items
-router.get('/get', getAllnote);
+router.get('/nget', getAllnote);
 
 // Update an existing inventory item
-router.put('/:idd', updatenote);
+router.put('/updateput/:idd', updatenote);
 
 // Delete an inventory item
 router.delete('/ddelete/:ied', deletenote);

@@ -12,7 +12,12 @@ import Signin from "./pages/Signin";
 import Profile from "./pages/profile";
 
 import Noteadd from "./pages/note/noteadd";
+import Notetabl from "./pages/note/notetable";
+import Noteupdate from "./pages/note/noteupdate";
 
+
+import Dashtable from "./pages/dash/table";
+import Updateuser from "./pages/dash/Update";
 
 
 
@@ -51,6 +56,12 @@ export default function App() {
       <Route path="/sign-up" element={<SignUp />} />
 
       <Route path="/note" element={<Noteadd />} />
+
+      <Route path="/n" element={<Notetabl />} />
+
+      <Route path="/iupdate/:incomid" element={<Noteupdate />} />
+
+      <Route path="/Uupdate/:mid" element={<Updateuser/>} />
     
 
 

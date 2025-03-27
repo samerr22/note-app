@@ -2,11 +2,11 @@ import Note from '../models/note.js';
 
 // Create Inventory Item
 export const createnote = async (req, res) => {
-  const { title, description} = req.body;
+  const { title, content} = req.body;
 
   try {
     const inventoryItem = new Note({
-        title, description
+        title, content
     });
 
     await inventoryItem.save();
@@ -29,11 +29,11 @@ export const getAllnote = async (req, res) => {
 // Update Inventory Item
 export const updatenote = async (req, res) => {
   const { idd } = req.params;
-  const { title, description } = req.body;
+  const { title, content } = req.body;
 
   try {
     const updatedInventoryItem = await Note.findByIdAndUpdate(idd, {
-        title, description
+        title, content
     }, { new: true });
 
     res.status(200).json({ message: 'note item updated successfully', updatedInventoryItem });
