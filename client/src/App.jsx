@@ -11,6 +11,8 @@ import SignUp from "./pages/SignUp";
 import Signin from "./pages/Signin";
 import Profile from "./pages/profile";
 
+import Noteadd from "./pages/note/noteadd";
+
 
 
 
@@ -45,7 +47,10 @@ export default function App() {
       <Route path="/sign" element={<Signin />} />
      
 
+
       <Route path="/sign-up" element={<SignUp />} />
+
+      <Route path="/note" element={<Noteadd />} />
     
 
 
