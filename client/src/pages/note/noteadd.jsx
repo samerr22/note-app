@@ -46,7 +46,7 @@ export default function BAdd() {
       if (res.ok) {
         setPublishError(null);
         alert("Submission successful!");
-        navigate("/Btable");
+        navigate("");
       }
     } catch (error) {
       setPublishError("Something went wrong");
@@ -71,12 +71,7 @@ export default function BAdd() {
           <h1 className="text-4xl font-semibold text-center text-white mb-4">
             Write Your Note
           </h1>
-          <Link
-            to={`/`}
-            className="text-md text-gray-400 hover:text-blue-400 underline mb-4 inline-block"
-          >
-            Go Back
-          </Link>
+         
 
           {publishError && (
             <p className="text-red-500 text-sm text-center">{publishError}</p>
@@ -114,7 +109,7 @@ export default function BAdd() {
               <ReactQuill
                 value={formData.content}
                 onChange={handleContentChange}
-                className="w-full p-3  bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3  bg-gray-100 text-black border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500"
                 placeholder="Write your article content here..."
               />
             </div>

@@ -20,6 +20,9 @@ import Dashtable from "./pages/dash/table";
 import Updateuser from "./pages/dash/Update";
 
 
+import Sidebar from "./pages/sidbar";
+
+
 
 
 
@@ -45,33 +48,45 @@ import Updateuser from "./pages/dash/Update";
 export default function App() {
   return (
     <BrowserRouter>
-      <Header />
+     
       <Routes>
 
 
-      <Route path="/sign" element={<Signin />} />
+      <Route path="/" element={<Signin />} />
      
 
 
       <Route path="/sign-up" element={<SignUp />} />
 
-      <Route path="/note" element={<Noteadd />} />
+    
+      <Route element={<PrivateRoute />}>
 
-      <Route path="/n" element={<Notetabl />} />
+      <Route path="/dashboard" element={<Sidebar/>}>
+      <Route path="note" element={<Noteadd />} />
 
-      <Route path="/iupdate/:incomid" element={<Noteupdate />} />
+      <Route path="notetable" element={<Notetabl />} />
 
-      <Route path="/Uupdate/:mid" element={<Updateuser/>} />
+      <Route path="iupdate/:incomid" element={<Noteupdate />} />
+
+      <Route path="Uupdate/:mid" element={<Updateuser/>} />
+
+      <Route path="dashbord" element={<Dashtable />} />
+
+      <Route path="dash" element={<Dashboard />} />
+      <Route path="profile" element={<Profile />} />
+
+
+      </Route>
     
 
 
-      <Route element={<PrivateRoute />}>
-      <Route path="/profile" element={<Profile />} />
+    
+      
      
      
 
    
-        <Route path="/dash" element={<Dashboard />} />
+       
 
 
         

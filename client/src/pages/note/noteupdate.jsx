@@ -4,8 +4,9 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // import styles for react-quill
 
 export default function Update() {
-    const [formData, setFormData] = useState({ title: '', content: '', _id: '' }); // Initialize with _id as an empty string
+    const [formData, setFormData] = useState({  content: '', _id: '' }); // Initialize with _id as an empty string
     const [publishError, setPublishError] = useState(null);
+    console.log(formData);
     
     const navigate = useNavigate();
     const { incomid } = useParams();
@@ -39,7 +40,7 @@ export default function Update() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch(`http://localhost:3000/api/note/updateput/${formData._id}`, {
+            const res = await fetch(`http://localhost:3000/api/note/update/${incomid}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -78,14 +79,9 @@ export default function Update() {
                     <div className="bg-gray-800 p-8 rounded-lg shadow-lg max-w-3xl w-full space-y-8 opacity-90">
 
                         <h1 className="text-4xl font-semibold text-center text-white mb-4">
-                            Write Your Note
+                            Update Your Note
                         </h1>
-                        <Link
-                            to={`/`}
-                            className="text-md text-gray-400 hover:text-blue-400 underline mb-4 inline-block"
-                        >
-                            Go Back
-                        </Link>
+                        
 
                         {publishError && (
                             <p className="text-red-500 text-sm text-center">{publishError}</p>
@@ -122,7 +118,7 @@ export default function Update() {
                                 <ReactQuill
                                     onChange={(value) => setFormData({ ...formData, content: value })}
                                     value={formData.content || ''}  
-                                    className="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    className="w-full p-3 bg-white text-black border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500"
                                     placeholder="Write your article content here..."
                                 />
                             </div>

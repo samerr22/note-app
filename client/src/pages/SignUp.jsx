@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
+  console.log(formData)
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -20,9 +21,7 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.username || !formData.email || !formData.password) {
-      return setErrorMessage("Plese fill out all fields");
-    }
+   
 
     try {
       setLoading(true);
@@ -39,7 +38,7 @@ export default function SignUp() {
       }
       setLoading(false);
       if(res.ok){
-        navigate('/sign');
+        navigate('/');
       }
     } catch (error) {
       setErrorMessage(error.message);
@@ -49,21 +48,7 @@ export default function SignUp() {
 
 
 
-  //validation
-  const handlePhoneNumberChange = (e) => {
-    const telephone = e.target.value.trim();
-    const phonePattern =
-      /^[\+]?[0-9]{1,4}[\s\-]?[0-9]{1,4}[\s\-]?[0-9]{1,4}[\s\-]?[0-9]{1,4}$/; // Pattern for phone numbers
-
-    if (telephone === "") {
-      setValidation(null);
-    } else if (!phonePattern.test(telephone)) {
-      setValidation(" valid phone number");
-    } else {
-      setFormData({ ...formData, telephone });
-      setValidation(null);
-    }
-  };
+ 
 
 
  
@@ -115,15 +100,15 @@ export default function SignUp() {
             <div className="flex-1">
               <h3 className="font-semibold text-gray-950 ml-1 mt-4">Gender</h3>
               <select
-                name="seat"
+                name="Gender"
                 id="Gender"
-               
+                onChange={handlchange}
                 className="bg-slate-800 bg-opacity-70 text-white border-white p-4 rounded-lg w-full h-14 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
                 <option value="">Select</option>
-                <option value="40">Male</option>
-                <option value="50">Femal</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
               </select>
             </div>
             </div>
@@ -144,7 +129,7 @@ export default function SignUp() {
   
       <div className="flex gap-2 text-sm mt-5 text-white justify-center">
         <span>Have an account?</span>
-        <Link to="/sign" className="text-blue-400 hover:text-blue-500">
+        <Link to="/" className="text-blue-400 hover:text-blue-500">
           Sign In
         </Link>
       </div>

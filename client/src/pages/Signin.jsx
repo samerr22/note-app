@@ -50,7 +50,7 @@ export default function SignIn() {
       }
 
       dispatch(signInSuccess(data));
-      navigate("/dash");
+      navigate("/dashboard/notetable");
     } catch (error) {
       dispatch(signInFailure("An error occurred. Please try again."));
     }
@@ -72,26 +72,13 @@ export default function SignIn() {
       {/* Form Container */}
       <div className=" bg-black bg-opacity-10 w-[480px] md:w-[550px] lg:w-[550px] h-auto mt-8 max-w-3xl mx-auto rounded-3xl  p-8">
       <div className="flex justify-center items-center gap-8">
-            <div >
-              <Link to="/sign">
-              <button className="bg-blue-600 bg-opacity-80 border text-white p-4 rounded-lg w-[200px] h-12 mt-6 hover:bg-blue-700 transition-all duration-300 focus:outline-none">
-                User
-              </button>
-              </Link>
-            </div>
-            <div>
-              <Link to="/dsign">
-              <button className="bg-blue-600 border text-white p-4 rounded-lg w-[200px] h-12 mt-6 hover:bg-blue-700 transition-all duration-300 focus:outline-none">
-                Driver
-              </button>
-              </Link>
-            </div>
+           
 
           </div>
         <div className="flex justify-center items-center">
           <div className=" w-full">
           <div className="mb-4 mt-4 font-serif flex justify-center items-center text-xl">
-              <h1>User</h1>
+              <h1>Login</h1>
             </div>
             <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
               {/* Email Input */}

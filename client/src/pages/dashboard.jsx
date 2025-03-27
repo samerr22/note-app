@@ -1,66 +1,133 @@
-import { FaBus, FaCalendarAlt, FaUsers, FaTicketAlt, FaRoute } from 'react-icons/fa'; // Update icons for bus management
+import { useEffect, useState } from 'react';
+import { FaBus, FaCalendarAlt, FaUsers, FaTicketAlt, FaRoute } from 'react-icons/fa'; // Icons for bus management
 import { Link } from 'react-router-dom';
+import { Bar, Pie } from 'react-chartjs-2'; // Importing chart libraries from Chart.js
+import { Chart as ChartJS } from 'chart.js/auto'; // Required for charts to work
 
 export default function BusTicketDashboard() {
+  const [info, setInfo] = useState([]);
+  const [user, setUser] = useState([]);
+
+  // Fetch note data (dashboard notes)
+  useEffect(() => {
+    const fetchInfo = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/api/note/nget`);
+        const data = await res.json();
+        if (res.ok) {
+          setInfo(data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchInfo();
+  }, []);
+
+  // Fetch user data
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/api/auth/get`);
+        const data = await res.json();
+        if (res.ok) {
+          setUser(data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchUser();
+  }, []);
+
+  // Chart data setup
+  const barChartData = {
+    labels: ['Notes', 'Users'],
+    datasets: [
+      {
+        label: 'Total Count',
+        data: [info.length, user.length],
+        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'],
+        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const pieChartData = {
+    labels: ['Notes', 'Users'],
+    datasets: [
+      {
+        data: [info.length, user.length],
+        backgroundColor: ['#36A2EB', '#FF6384'],
+      },
+    ],
+  };
+
   return (
     <div className="relative w-full h-screen bg-cover bg-center" style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/traffic-vehicle-urban-reflections-city.jpg?alt=media&token=f6462f17-8cbf-4415-9c15-733f702bc511)' }}>
       {/* Overlay for better text visibility */}
       <div className="absolute inset-0 bg-black opacity-40"></div>
 
-      {/* Centered Content */}
-      <div className="relative z-10 flex items-center justify-center h-full">
-        <div className="space-y-6 text-center max-w-7xl w-full px-6">
-          <h1 className="text-4xl font-extrabold mt-[-180px] text-white mb-10">Highway Bus Ticket Management</h1>
+      <div className="relative z-10 text-white p-6">
+        <h1 className="text-3xl font-bold">Bus Ticket Dashboard</h1>
+        
+        {/* Total Counts */}
+        <div className="flex space-x-8 mt-4">
+          <div className="p-4 bg-opacity-70 bg-blue-500 rounded-lg">
+            <div className="flex items-center space-x-2">
+              <FaUsers />
+              <h2 className="text-xl font-semibold">Total Users</h2>
+            </div>
+            <p className="mt-2">{user.length}</p>
+          </div>
+          <div className="p-4 bg-opacity-70 bg-green-500 rounded-lg">
+            <div className="flex items-center space-x-2">
+              <FaTicketAlt />
+              <h2 className="text-xl font-semibold">Total Notes</h2>
+            </div>
+            <p className="mt-2">{info.length}</p>
+          </div>
+        </div>
 
-          {/* Welcome Message */}
-          <p className="text-lg text-white mb-10">Manage your bus tickets, routes, schedules, and more efficiently.</p>
+        {/* Bar and Pie Charts Container */}
+        <div className="mt-8 flex space-x-8">
+          {/* Bar Chart */}
+       
+          {/* Pie Chart */}
+          <div className="flex-1 p-4 h-[250px] bg-black bg-opacity-50  rounded-lg shadow-lg">
+            <h3 className="text-lg font-semibold  mt-[-50px] text-center mb-8">Analysis - Pie Chart</h3>
+            <Pie data={pieChartData} options={{ responsive: true, maintainAspectRatio: false, height: 150 }} />
+          </div>
+        </div>
 
-          {/* Navigation Buttons - Horizontal Layout */}
-          <div className="space-y-6 sm:space-y-0 sm:grid sm:grid-cols-2 lg:grid-cols-5 gap-6 justify-center">
-            {/* Book Ticket Button */}
-            <Link to={``}>
-              <button className="flex items-center justify-between w-full sm:w-60 p-4 bg-gradient-to-r from-blue-700 via-blue-800 to-black text-white rounded-lg shadow-lg hover:shadow-2xl hover:scale-110 transform transition duration-300 ease-in-out hover:ring-2 hover:ring-white hover:ring-opacity-50">
-                <FaTicketAlt className="text-2xl" />
-                <span className="ml-3 text-lg">Seat Booking</span>
-              </button>
-            </Link>
+        {/* User List and Notes Section */}
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
+          {/* User List */}
+          <div className="bg-black bg-opacity-50 p-6 rounded-lg shadow-lg">
+            <h3 className="text-xl font-semibold mb-4">User List</h3>
+            <div className="overflow-x-auto scrollbar-none lg:h-[70px]">
+            <ul className="list-disc pl-6 text-lg">
+              {user.map((u) => (
+                <li key={u._id} className="mt-2">{u.username}</li>
+              ))}
+            </ul>
+            </div>
+          </div>
 
-            {/* Manage Routes Button */}
-            <Link to={``}>
-              <button className="flex items-center justify-between w-full sm:w-60 p-4 bg-gradient-to-r from-green-700 via-green-800 to-black text-white rounded-lg shadow-lg hover:shadow-2xl hover:scale-110 transform transition duration-300 ease-in-out hover:ring-2 hover:ring-white hover:ring-opacity-50">
-                <FaRoute className="text-2xl" />
-                <span className="ml-3 text-lg">Bus Tracking</span>
-              </button>
-            </Link>
-
-            {/* View Schedule Button */}
-            <Link to={``}>
-              <button className="flex items-center justify-between w-full sm:w-60 p-4 bg-gradient-to-r from-yellow-700 via-yellow-800 to-black text-white rounded-lg shadow-lg hover:shadow-2xl hover:scale-110 transform transition duration-300 ease-in-out hover:ring-2 hover:ring-white hover:ring-opacity-50">
-                <FaCalendarAlt className="text-2xl" />
-                <span className="ml-3 text-lg">Faq</span>
-              </button>
-            </Link>
-
-            {/* Passenger Details Button */}
-            <Link to={`/profile`}>
-              <button className="flex items-center justify-between w-full sm:w-60 p-4 bg-gradient-to-r from-purple-700 via-purple-800 to-black text-white rounded-lg shadow-lg hover:shadow-2xl hover:scale-110 transform transition duration-300 ease-in-out hover:ring-2 hover:ring-white hover:ring-opacity-50">
-                <FaUsers className="text-2xl" />
-                <span className="ml-3 text-lg">Passenger Details</span>
-              </button>
-            </Link>
-
-            {/* Reports Button */}
-            <Link to={`/reports`}>
-              <button className="flex items-center justify-between w-full sm:w-60 p-4 bg-gradient-to-r from-red-700 via-red-800 to-black text-white rounded-lg shadow-lg hover:shadow-2xl hover:scale-110 transform transition duration-300 ease-in-out hover:ring-2 hover:ring-white hover:ring-opacity-50">
-                <FaBus className="text-2xl" />
-                <span className="ml-3 text-lg">Admin</span>
-              </button>
-            </Link>
+          {/* Note Titles */}
+          <div className="bg-black bg-opacity-50 p-6 rounded-lg shadow-lg">
+            <h3 className="text-xl font-semibold mb-4">Note Titles</h3>
+            <div className="overflow-x-auto scrollbar-none lg:h-[70px]">
+            <ul className="list-disc pl-6 text-lg">
+              {info.map((note) => (
+                <li key={note._id} className="mt-2">{note.title}</li>
+              ))}
+            </ul>
+            </div>
           </div>
         </div>
       </div>
-
-      
     </div>
   );
 }

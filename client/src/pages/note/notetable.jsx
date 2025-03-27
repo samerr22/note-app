@@ -34,47 +34,42 @@ export default function notetable() {
 
   const generatePDF = () => {
     const doc = new jsPDF();
-
+  
     // Title of the PDF
     doc.setFont("helvetica", "bold");
     doc.setFontSize(22);
-    doc.text("Order Report", 14, 20);
-
-    let yOffset = 30; // Starting position for the first order
-
-    // Loop through the orders (filter) and generate the layout
-    filter.forEach((course, index) => {
+    doc.text("Note Report", 14, 20);
+  
+    let yOffset = 30; // Starting position for the first note
+  
+    // Loop through the filtered notes (filter) and generate the layout
+    filter.forEach((note, index) => {
       doc.setFontSize(12);
       doc.setFont("helvetica", "normal");
-
-      // Order Details
-      doc.text(`Item: ${course.itemname}`, 14, yOffset);
+  
+      // Add note title
+      doc.text(`Note ${index + 1}: ${note.title}`, 14, yOffset);
       yOffset += 8;
-      doc.text(`Price: $${course.amount}`, 14, yOffset);
-      yOffset += 8;
-      doc.text(`Paymentmethod: ${course.paymentmethod}`, 14, yOffset);
-      yOffset += 8;
-      doc.text(`quantity: ${course.quntity}`, 14, yOffset);
-      yOffset += 8;
-      doc.text(`Phone: ${course.phone}`, 14, yOffset);
-      yOffset += 8;
-      doc.text(`Address: ${course.address}`, 14, yOffset);
-      yOffset += 8;
-
-      // Add a line to separate orders
-      doc.line(14, yOffset, 200, yOffset);
-      yOffset += 10;
-
-      // Add space between orders
+  
+      // Add note content (stripped HTML tags)
+      const content = stripHtmlTags(note.content);
+      const contentLines = doc.splitTextToSize(content, 180); // Split content into lines to fit within the page width
+  
+      // Add content to the PDF
+      doc.text(contentLines, 14, yOffset);
+      yOffset += contentLines.length * 8; // Adjust yOffset based on content lines
+  
+      // Add space between notes
       if (yOffset > 250) {
         doc.addPage();
         yOffset = 20; // Reset position after a new page
       }
     });
-
+  
     // Save the document with the file name
-    doc.save("OrderReport.pdf");
+    doc.save("NoteReport.pdf");
   };
+  
 
   const handleDeleteUser = async () => {
     try {
@@ -99,8 +94,8 @@ export default function notetable() {
     } else {
       const filteredData = Info.filter(
         (course) =>
-          course.itemname &&
-          course.itemname.toLowerCase().includes(query.toLowerCase())
+          course.title &&
+          course.title.toLowerCase().includes(query.toLowerCase())
       );
       setfilter(filteredData);
     }
@@ -135,23 +130,16 @@ export default function notetable() {
               onClick={generatePDF}
               className="mt-4 bg-blue-600 font-serif text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300"
             >
-              Order History Report
+              Note Report
             </button>
-            <Link to={`/Iadd`}>
+            <Link to={`/dashboard/note`}>
               <button className="mt-4 bg-blue-600 font-serif text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300">
-                New Order
+                New Note
               </button>
             </Link>
           </div>
 
-          {/* Back Navigation */}
-          <Link
-            to={`/`}
-            className="text-md text-gray-400 hover:text-blue-400 underline flex items-center mt-4"
-          >
-            <FaArrowLeft className="mr-2" /> {/* Left arrow icon */}
-            Back to Dashboard
-          </Link>
+         
 
           {/* Orders Section */}
           <div className="overflow-x-auto scrollbar-none lg:h-[500px] ">
@@ -162,15 +150,15 @@ export default function notetable() {
                     key={order._id}
                     className="bg-gray-800 bg-opacity-50 text-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 flex flex-col"
                   >
-                    <div className="text-xl font-semibold">{order.title}</div>
-                    <div className="mt-2 text-sm text-gray-400 ">
+                    <div className="text-xl font-semibold break-words">{order.title}</div>
+                    <div className="mt-2 text-sm text-gray-400 break-words  ">
                       {stripHtmlTags(order.content)}{" "}
                       {/* Stripping out HTML tags */}
                     </div>
 
                     {/* Action Buttons */}
                     <div className="flex mt-4 gap-4 justify-center">
-                      <Link to={`/iupdate/${order._id}`}>
+                      <Link to={`/dashboard/iupdate/${order._id}`}>
                         <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow-md transition duration-300">
                           <FaEdit className="text-lg mr-2" /> {/* Edit Icon */}
                         </button>

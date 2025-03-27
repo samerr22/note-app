@@ -3,22 +3,25 @@ import { Link } from "react-router-dom";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { useSelector } from "react-redux";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft } from 'react-icons/fa'; // Import the left arrow icon
 
 
-export default function Table() {
+
+
+export default function BManageEmp() {
   const [Info, setInfo] = useState([]);
-  console.log(Info)
+  console.log(Info);
   const [DId, setformId] = useState("");
   const [filter, setfilter] = useState([]);
   const [query, setQuery] = useState("");
 
 
- 
   useEffect(() => {
     const fetchinfo = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/auth/get`);
+        const res = await fetch(
+          `http://localhost:3000/api/auth/get`
+        );
         const data = await res.json();
         console.log(data);
         if (res.ok) {
@@ -33,55 +36,29 @@ export default function Table() {
 
   const generatePDF = () => {
     const doc = new jsPDF();
-    
-    // Title of the PDF
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(22);
-    doc.text("Order Report", 14, 20);
-  
-    let yOffset = 30; // Starting position for the first order
-    
-    // Loop through the orders (filter) and generate the layout
-    filter.forEach((course, index) => {
-      // Set the header for each order (Menu, Price, Date, etc.)
-      doc.setFontSize(12);
-      doc.setFont("helvetica", "normal");
-  
-      // Order Details
-      doc.text(`Item: ${course.itemname}`, 14, yOffset);
-      yOffset += 8;
-      doc.text(`Price: $${course.amount}`, 14, yOffset);
-      yOffset += 8;
-      doc.text(`Paymentmethod: ${course.paymentmethod}`, 14, yOffset);
-      yOffset += 8;
-      doc.text(`quantity: ${course.quntity}`, 14, yOffset);
-      yOffset += 8;
-      doc.text(`Phone: ${course.phone}`, 14, yOffset);
-      yOffset += 8;
-      doc.text(`Address: ${course.address}`, 14, yOffset);
-      yOffset += 8;
-  
-      // Add a line to separate orders
-      doc.line(14, yOffset, 200, yOffset);
-      yOffset += 10;
-  
-      // Add space between orders
-      if (yOffset > 250) {
-        doc.addPage();
-        yOffset = 20; // Reset position after a new page
-      }
+    doc.autoTable({
+      head: [["Name", "email","Gender", "password"]],
+      body: filter.map((course) => [
+        course.username,
+        course.email,
+        course.Gender,
+        course.password
+      
+      ]),
+      theme: "grid",
+      headStyles: { fillColor: [0, 0, 255] }
     });
-  
-    // Save the document with the file name
-    doc.save("OrderReport.pdf");
+    doc.save("user.pdf");
   };
 
-  
   const handleDeleteUser = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/order/odelete/${DId}`, {
-        method: "DELETE"
-      });
+      const res = await fetch(
+        `http://localhost:3000/api/auth/delete/${DId}`,
+        {
+          method: "DELETE"
+        }
+      );
       if (res.ok) {
         setInfo((prev) => prev.filter((course) => course._id !== DId));
         alert("Deleted");
@@ -97,110 +74,122 @@ export default function Table() {
     } else {
       const filteredData = Info.filter(
         (course) =>
-          course.itemname &&
-        course.itemname.toLowerCase().includes(query.toLowerCase())
+          course.email && course.email.toLowerCase().includes(query.toLowerCase())
       );
       setfilter(filteredData);
     }
   }, [query, Info]);
 
-
-
-  
-
-
-    
-
- 
-
-
   return (
-    <div className="h-[800px] relative bg-cover bg-center" style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/condiments-prepare-italian-pasta.jpg?alt=media&token=2fb237c4-2775-4e24-bfbc-4d86efb28b07)' }}>
-    {/* Dark overlay for readability */}
-    <div className="absolute inset-0 bg-black opacity-50"></div>
-  
-    <div className="items-center justify-center flex relative z-10">
-      <div className="items-center mt-10">
-        {/* Search Input */}
-        <div className="flex justify-center mt-4">
-          <input
-            type="text"
-            placeholder="Search Orders..."
-            className="w-[400px] h-12 rounded-full bg-black shadow-xl border border-slate-400 bg-opacity-10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
-  
-        {/* Action Buttons */}
-        <div className="flex justify-center gap-4 mt-4">
-          <button
-            onClick={generatePDF}
-            className="mt-4 bg-blue-600 font-serif text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300"
-          >
-           Order Histry Report
-          </button>
-          <Link to={`/Iadd`}>
-            <button
-              className="mt-4 bg-blue-600 font-serif text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300"
-            >
-             New Order
-            </button>
-          </Link>
-        </div>
-  
-        {/* Back Navigation */}
-        <Link to={`/`} className="text-md text-gray-400 hover:text-blue-400 underline flex items-center mt-4">
-          <FaArrowLeft className="mr-2" /> {/* Left arrow icon */}
-          Back to Dashboard
-        </Link>
-  
-        {/* Orders Section */}
-        <div className="overflow-x-auto scrollbar-none lg:h-[500px] ">
-        <div className="lg:w-[1200px] mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-          {filter && filter.length > 0 ? (
-            filter.map((order) => (
-              <div key={order._id} className="bg-gray-800 bg-opacity-50 text-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 flex flex-col">
-                <div className="text-xl font-semibold">{order.itemname}</div>
-                <div className="mt-2 text-sm text-gray-400">Price: ${order.amount}</div>
+    <div
+      className="h-[800px] relative bg-cover bg-center"
+      style={{
+        backgroundImage:
+          "url(https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/condiments-prepare-italian-pasta.jpg?alt=media&token=2fb237c4-2775-4e24-bfbc-4d86efb28b07)"
+      }}
+    >
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-black opacity-50"></div>
 
-                <div className="mt-2 text-sm text-gray-400">Phone: {order.phone}</div>
-                <div className="mt-2 text-sm text-gray-400">Address: {order.address}</div>
-                <div className="mt-2 text-sm text-gray-400">Paymentmethod: {order.paymentmethod}</div>
-                <div className="mt-2 text-sm text-gray-400">quantity: {order.quntity}</div>
-                <div className="mt-2 text-sm text-gray-400">Notes: {order.notes}</div>
-                <div className="mt-2 text-sm text-gray-400">Status: {order.orderStatus}</div>
-  
-                {/* Action Buttons */}
-                <div className="flex mt-4 gap-4 justify-center">
-                  <Link to={`/iupdate/${order._id}`}>
-                    <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow-md transition duration-300">
-                      Edit
-                    </button>
-                  </Link>
-                  <button
-                    onClick={() => {
-                      setformId(order._id);
-                      handleDeleteUser();
-                    }}
-                    className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg shadow-md transition duration-300"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="col-span-3 text-center  text-gray-500 py-4">
-              No orders found
+      <div className="items-center justify-center  flex relative z-10">
+        <div className="items-center mt-16">
+          {/* Search Input */}
+          <div className="flex justify-center mt-8">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-[400px] h-10 mt-4 rounded-full bg-black shadow-xl border border-slate-400 bg-opacity-10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex justify-center gap-4 mt-4">
+            <div>
+              <button
+                onClick={generatePDF}
+                className="mt-4 bg-blue-600 font-serif text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+              >
+                user Report
+              </button>
             </div>
-          )}
+         
+          </div>
+
+     
+
+          {/* Table Container */}
+          <div className="lg:w-[1200px] mt-4 rounded-3xl shadow-xl bg-opacity-50 bg-gray-800 text-white overflow-hidden">
+            <div className="overflow-x-auto lg:h-[500px]">
+              <table className="min-w-full bg-opacity-50 bg-gray-800 text-sm">
+                <thead className="bg-blue-800 text-white">
+                  <tr>
+                    <th className="px-6 py-4 text-left">UserName</th>
+                    <th className="px-6 py-4 text-left">Email</th>
+                    <th className="px-6 py-4 text-left">Gender</th>
+                    <th className="px-6 py-4 text-left">Password</th>
+
+                    <th className="px-6 py-4 text-center">Edit</th>
+                    <th className="px-6 py-4 text-center">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filter && filter.length > 0 ? (
+                    filter.map((course) => (
+                      <tr
+                        key={course._id}
+                        className="hover:bg-black transition-colors duration-300"
+                      >
+                        <td className="px-6 py-4 border-b text-gray-200">
+                          {course.username}
+                        </td>
+                        <td className="px-6 py-4 border-b text-gray-200">
+                          {course.email}
+                        </td>
+                        <td className="px-6 py-4 border-b text-gray-200">
+                          {course.Gender}
+                        </td>
+                        <td className="px-6 py-4 border-b text-gray-200">
+                          {course.password}
+                        </td>
+                        
+
+                        <td className="px-6 py-4 border-b text-center">
+                          <Link to={`/dashboard/Uupdate/${course._id}`}>
+                            <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow-md transition duration-300">
+                              Edit
+                            </button>
+                          </Link>
+                        </td>
+                        <td className="px-6 py-4 border-b text-center">
+                          <button
+                            onClick={() => {
+                              setformId(course._id);
+                              handleDeleteUser();
+                            }}
+                            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg shadow-md transition duration-300"
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td
+                        colSpan="8"
+                        className="text-center text-gray-500 py-4"
+                      >
+                        No records found
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  
-  
   );
 }

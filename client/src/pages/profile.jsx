@@ -103,10 +103,7 @@ export default function DashProfile() {
             <h2 className="text-3xl font-semibold text-blue-950">User Profile</h2>
           </div>
           
-                    <Link to={`/dash`} className="text-md text-gray-400 mb-6 hover:text-blue-400 underline flex items-center">
-            <FaArrowLeft className="mr-2" /> {/* Add left arrow icon */}
-           
-          </Link>
+                    
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="flex gap-6">

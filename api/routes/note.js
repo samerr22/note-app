@@ -11,7 +11,7 @@ router.post('/icreate', createnote);
 router.get('/nget', getAllnote);
 
 // Update an existing inventory item
-router.put('/updateput/:idd', updatenote);
+router.put('/update/:idd', updatenote);
 
 // Delete an inventory item
 router.delete('/ddelete/:ied', deletenote);
