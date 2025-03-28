@@ -116,11 +116,12 @@ export default function Update() {
              <div className="flex items-center space-x-2">
               <input
                 className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-                type="text"
+                type="email"
                 placeholder="email"
                 id="email"
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 value={formData.email}
+                required
                 
                 
                 
@@ -134,6 +135,7 @@ export default function Update() {
                    id="username"
                    onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                    value={formData.username}
+                   required
                   
                   
                   
@@ -152,6 +154,7 @@ export default function Update() {
                    id="password"
                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                    value={formData.password}
+                   required
                 
                  />
                </div>

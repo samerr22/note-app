@@ -43,13 +43,13 @@ export default function Sidbar() {
         {/* User Profile */}
         {currentUser ? (
           <div className="flex items-center mb-8">
-            <NavLink to="/profile" className="flex items-center">
+           
               <img
                 src={currentUser.profilePicture}
                 alt="profile"
                 className="h-10 w-10 rounded-full object-cover"
               />
-            </NavLink>
+           
             <div className="ml-4">
               <div className="text-lg font-semibold">Hi, {currentUser.username}</div>
               <div className="text-sm opacity-75">Welcome back!</div>
