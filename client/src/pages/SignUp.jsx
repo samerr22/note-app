@@ -57,7 +57,7 @@ export default function SignUp() {
     <div
     className="min-h-screen bg-cover bg-center flex items-center justify-center"
     style={{
-      backgroundImage: 'url("https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/traffic-vehicle-urban-reflections-city.jpg?alt=media&token=f6462f17-8cbf-4415-9c15-733f702bc511',
+      backgroundImage: 'url("https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/top-view-agenda-glasses-pencil.jpg?alt=media&token=6d98d4f5-3af6-4783-8899-9d27ba93abdc',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
     }}
@@ -65,7 +65,7 @@ export default function SignUp() {
     <div className="bg-opacity-80 bg-none p-8 rounded-xl shadow-xl max-w-lg w-full">
       <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
         <div>
-          <h3 className="font-semibold ml-1 text-slate-950">Email</h3>
+          <h3 className="font-semibold ml-1 text-white">Email</h3>
           <input
             className="bg-slate-800 bg-opacity-70 text-white border-white p-4 rounded-lg w-full h-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="email"
@@ -75,7 +75,7 @@ export default function SignUp() {
           />
         </div>
         <div>
-          <h3 className="font-semibold text-slate-950 ml-1">Username</h3>
+          <h3 className="font-semibold text-white ml-1">Username</h3>
           <input
             className="bg-slate-800 bg-opacity-70 text-white border-white p-4 rounded-lg w-full h-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="text"
@@ -86,7 +86,7 @@ export default function SignUp() {
           />
         </div>
         <div>
-          <h3 className="font-semibold text-slate-950 text-slate-300 ml-1">Password</h3>
+          <h3 className="font-semibold text-white ml-1">Password</h3>
           <input
             className="bg-slate-800 bg-opacity-70 text-white border-white p-4 rounded-lg w-full h-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="password"
@@ -98,7 +98,7 @@ export default function SignUp() {
         </div>
         <div className="flex gap-6 flex-wrap">
             <div className="flex-1">
-              <h3 className="font-semibold text-gray-950 ml-1 mt-4">Gender</h3>
+              <h3 className="font-semibold text-white ml-1 mt-4">Gender</h3>
               <select
                 name="Gender"
                 id="Gender"
@@ -115,7 +115,7 @@ export default function SignUp() {
         
         
         <button
-          className="bg-blue-600 text-white p-4 rounded-lg w-full h-12 hover:bg-blue-700 transition-all duration-300 focus:outline-none"
+          className="bg-slate-900 text-white p-4 rounded-lg w-full h-12 hover:bg-blue-700 transition-all duration-300 focus:outline-none"
           type="submit"
           disabled={loading}
         >

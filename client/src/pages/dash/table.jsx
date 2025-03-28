@@ -85,7 +85,7 @@ export default function BManageEmp() {
       className="h-[800px] relative bg-cover bg-center"
       style={{
         backgroundImage:
-          "url(https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/condiments-prepare-italian-pasta.jpg?alt=media&token=2fb237c4-2775-4e24-bfbc-4d86efb28b07)"
+          "url(https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/top-view-agenda-glasses-pencil.jpg?alt=media&token=6d98d4f5-3af6-4783-8899-9d27ba93abdc)"
       }}
     >
       {/* Dark overlay for readability */}
@@ -108,9 +108,9 @@ export default function BManageEmp() {
             <div>
               <button
                 onClick={generatePDF}
-                className="mt-4 bg-blue-600 font-serif text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+                className="mt-4 bg-blue-800 font-serif text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
               >
-                user Report
+                User Report
               </button>
             </div>
          
@@ -122,7 +122,7 @@ export default function BManageEmp() {
           <div className="lg:w-[1200px] mt-4 rounded-3xl shadow-xl bg-opacity-50 bg-gray-800 text-white overflow-hidden">
             <div className="overflow-x-auto lg:h-[500px]">
               <table className="min-w-full bg-opacity-50 bg-gray-800 text-sm">
-                <thead className="bg-blue-800 text-white">
+                <thead className="bg-blue-950 text-white">
                   <tr>
                     <th className="px-6 py-4 text-left">UserName</th>
                     <th className="px-6 py-4 text-left">Email</th>

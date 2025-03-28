@@ -60,7 +60,7 @@ export default function SignIn() {
     <div className="relative h-[800px]">
   {/* Background Image with Dark Overlay */}
   <img
-    src="https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/traffic-vehicle-urban-reflections-city.jpg?alt=media&token=f6462f17-8cbf-4415-9c15-733f702bc511"
+    src="https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/top-view-agenda-glasses-pencil.jpg?alt=media&token=6d98d4f5-3af6-4783-8899-9d27ba93abdc"
     alt="Background Image"
     className="w-full h-full object-cover"
   />
@@ -77,13 +77,13 @@ export default function SignIn() {
           </div>
         <div className="flex justify-center items-center">
           <div className=" w-full">
-          <div className="mb-4 mt-4 font-serif flex justify-center items-center text-xl">
+          <div className="mb-4 mt-4 font-serif flex justify-center items-center text-white text-xl">
               <h1>Login</h1>
             </div>
             <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
               {/* Email Input */}
               <div>
-                <h3 className="font-semibold text-gray-950 ml-1">Email</h3>
+                <h3 className="font-semibold text-white ml-1">Email</h3>
                 <input
                   className="bg-slate-800 bg-opacity-70 border-white p-4 border-opacity-50 rounded-lg w-full h-12 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="email"
@@ -95,7 +95,7 @@ export default function SignIn() {
 
               {/* Password Input */}
               <div>
-                <h3 className="font-semibold text-gray-950 opacity-70 ml-1">Password</h3>
+                <h3 className="font-semibold text-white  ml-1">Password</h3>
                 <input
                   className="bg-slate-800 bg-opacity-70 border-white p-4 border-opacity-50 rounded-lg w-full h-12 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="password"
@@ -107,7 +107,7 @@ export default function SignIn() {
 
               {/* Submit Button */}
               <button
-                className="bg-blue-600 text-white p-4 rounded-lg w-full h-12 mt-6 hover:bg-blue-700 transition-all duration-300 focus:outline-none"
+                className="bg-slate-900 text-white p-4 rounded-lg w-full h-12 mt-6 hover:bg-blue-700 transition-all duration-300 focus:outline-none"
                 type="submit"
                 disabled={loading}
               >

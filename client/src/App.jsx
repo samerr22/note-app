@@ -21,6 +21,9 @@ import Updateuser from "./pages/dash/Update";
 
 
 import Sidebar from "./pages/sidbar";
+import Firebase from "./pages/image";
+import RAudio from "./pages/audio";
+
 
 
 
@@ -74,6 +77,8 @@ export default function App() {
 
       <Route path="dash" element={<Dashboard />} />
       <Route path="profile" element={<Profile />} />
+      <Route path="image" element={<Firebase />} />
+      <Route path="audio" element={<RAudio />} />
 
 
       </Route>
@@ -99,7 +104,7 @@ export default function App() {
        
      
       </Routes>
-      <Footer />
+     
     </BrowserRouter>
   );
 }

@@ -69,7 +69,7 @@ export default function Update() {
             className="relative w-full h-[800px] bg-cover bg-center"
             style={{
                 backgroundImage:
-                    "url(https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/vintage-old-rustic-cutlery-dark_1220-4886.jpg?alt=media&token=d9c24b0f-4046-4e50-ab02-2ca7d6ae8cba)",
+                    "url(https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/top-view-agenda-glasses-pencil.jpg?alt=media&token=6d98d4f5-3af6-4783-8899-9d27ba93abdc)",
             }}
         >
             <div className="absolute inset-0 bg-black opacity-60"></div>

@@ -106,7 +106,7 @@ export default function notetable() {
       className="h-[800px] relative bg-cover bg-center"
       style={{
         backgroundImage:
-          "url(https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/condiments-prepare-italian-pasta.jpg?alt=media&token=2fb237c4-2775-4e24-bfbc-4d86efb28b07)"
+          "url(https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/top-view-agenda-glasses-pencil.jpg?alt=media&token=6d98d4f5-3af6-4783-8899-9d27ba93abdc)"
       }}
     >
       {/* Dark overlay for readability */}
@@ -118,7 +118,7 @@ export default function notetable() {
           <div className="flex justify-center mt-4">
             <input
               type="text"
-              placeholder="Search Orders..."
+              placeholder="Search Note..."
               className="w-[400px] h-12 rounded-full bg-black shadow-xl border border-slate-400 bg-opacity-10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
               onChange={(e) => setQuery(e.target.value)}
             />
@@ -148,7 +148,7 @@ export default function notetable() {
                 filter.map((order) => (
                   <div
                     key={order._id}
-                    className="bg-gray-800 bg-opacity-50 text-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 flex flex-col"
+                    className="bg-gray-800 bg-opacity-80 text-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 flex flex-col"
                   >
                     <div className="text-xl font-semibold break-words">{order.title}</div>
                     <div className="mt-2 text-sm text-gray-400 break-words  ">
@@ -159,7 +159,7 @@ export default function notetable() {
                     {/* Action Buttons */}
                     <div className="flex mt-4 gap-4 justify-center">
                       <Link to={`/dashboard/iupdate/${order._id}`}>
-                        <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow-md transition duration-300">
+                        <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-2 rounded-lg shadow-md transition duration-300">
                           <FaEdit className="text-lg mr-2" /> {/* Edit Icon */}
                         </button>
                       </Link>
@@ -179,7 +179,7 @@ export default function notetable() {
                 ))
               ) : (
                 <div className="col-span-3 text-center text-gray-500 py-4">
-                  No orders found
+                  No Note found
                 </div>
               )}
             </div>

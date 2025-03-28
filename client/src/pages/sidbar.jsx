@@ -1,5 +1,4 @@
-// src/components/DashboardLayout.js
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom"; // Use NavLink instead of Link for active styles
 import { useSelector, useDispatch } from "react-redux";
 import { signoutSuccess } from "../redux/user/userSilce";
 import { FaUser, FaStickyNote, FaRobot, FaUsers, FaChartBar, FaSignOutAlt } from 'react-icons/fa';  // Importing icons
@@ -44,13 +43,13 @@ export default function Sidbar() {
         {/* User Profile */}
         {currentUser ? (
           <div className="flex items-center mb-8">
-            <Link to="/profile" className="flex items-center">
+            <NavLink to="/profile" className="flex items-center">
               <img
                 src={currentUser.profilePicture}
                 alt="profile"
                 className="h-10 w-10 rounded-full object-cover"
               />
-            </Link>
+            </NavLink>
             <div className="ml-4">
               <div className="text-lg font-semibold">Hi, {currentUser.username}</div>
               <div className="text-sm opacity-75">Welcome back!</div>
@@ -58,9 +57,9 @@ export default function Sidbar() {
           </div>
         ) : (
           <div className="text-center">
-            <Link to="/" className="text-white hover:text-gray-400">
+            <NavLink to="/" className="text-white hover:text-gray-400">
               Login
-            </Link>
+            </NavLink>
           </div>
         )}
 
@@ -70,51 +69,71 @@ export default function Sidbar() {
           <nav>
             <ul>
               <li className="mb-3">
-                <Link
+                <NavLink
                   to="/dashboard/Profile"
-                  className="flex items-center text-white text-lg font-serif hover:text-red-400"
+                  className="flex items-center text-white text-lg font-serif hover:text-blue-600"
+                  activeClassName="text-blue-600" // Apply an active class
                 >
                   <FaUser className="mr-3" /> Profile
-                </Link>
+                </NavLink>
               </li>
 
               <li className="mb-3">
-                <Link
+                <NavLink
                   to="/dashboard/notetable"
-                  className="flex items-center text-white text-lg font-serif hover:text-red-400"
+                  className="flex items-center text-white text-lg font-serif hover:text-blue-600"
+                  activeClassName="text-blue-600"
                 >
                   <FaStickyNote className="mr-3" /> Note
-                </Link>
+                </NavLink>
               </li>
 
               <li className="mb-3">
-                <Link
-                  to="/dashboard/ai"
-                  className="flex items-center text-white text-lg font-serif hover:text-red-400"
+                <NavLink
+                  to="/dashboard/image"
+                  className="flex items-center text-white text-lg font-serif hover:text-blue-600"
+                  activeClassName="text-blue-600"
                 >
-                  <FaRobot className="mr-3" /> AI
-                </Link>
+                  <FaRobot className="mr-3" /> Image to Text
+                </NavLink>
               </li>
 
               <li className="mb-3">
-                <Link
+                <NavLink
+                  to="/dashboard/audio"
+                  className="flex items-center text-white text-lg font-serif hover:text-blue-600"
+                  activeClassName="text-blue-600"
+                >
+                  <FaRobot className="mr-3" /> Speech to text
+                </NavLink>
+              </li>
+
+              <li className="mb-3">
+                <NavLink
                   to="/dashboard/dashbord"
-                  className="flex items-center text-white text-lg font-serif hover:text-red-400"
+                  className="flex items-center text-white text-lg font-serif hover:text-blue-600"
+                  activeClassName="text-blue-600"
                 >
                   <FaUsers className="mr-3" /> User Management
-                </Link>
+                </NavLink>
               </li>
 
               <li className="mb-3">
-                <Link
+                <NavLink
                   to="/dashboard/dash"
-                  className="flex items-center text-white text-lg font-serif hover:text-red-400"
+                  className="flex items-center text-white text-lg font-serif hover:text-blue-600"
+                  activeClassName="text-blue-600"
                 >
                   <FaChartBar className="mr-3" /> Analysis
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </nav>
+        </div>
+
+        {/* Logo under the sidebar */}
+        <div className="mt-8 flex justify-center">
+          <img src="/path/to/your/logo.png" alt="Logo" className="h-16 w-auto" />
         </div>
 
         <hr className="bg-gray-600 h-1 opacity-60 mt-8" />

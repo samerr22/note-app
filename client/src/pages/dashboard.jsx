@@ -65,12 +65,12 @@ export default function BusTicketDashboard() {
   };
 
   return (
-    <div className="relative w-full h-screen bg-cover bg-center" style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/traffic-vehicle-urban-reflections-city.jpg?alt=media&token=f6462f17-8cbf-4415-9c15-733f702bc511)' }}>
+    <div className="relative w-full h-screen bg-cover bg-center" style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/top-view-agenda-glasses-pencil.jpg?alt=media&token=6d98d4f5-3af6-4783-8899-9d27ba93abdc)' }}>
       {/* Overlay for better text visibility */}
       <div className="absolute inset-0 bg-black opacity-40"></div>
 
       <div className="relative z-10 text-white p-6">
-        <h1 className="text-3xl font-bold">Bus Ticket Dashboard</h1>
+        <h1 className="text-3xl font-bold"> Dashboard</h1>
         
         {/* Total Counts */}
         <div className="flex space-x-8 mt-4">

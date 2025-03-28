@@ -92,7 +92,7 @@ export default function DashProfile() {
     <div
       className="relative min-h-screen bg-cover bg-center"
       style={{
-        backgroundImage: "url('https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/traffic-vehicle-urban-reflections-city.jpg?alt=media&token=f6462f17-8cbf-4415-9c15-733f702bc511')",
+        backgroundImage: "url('https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/top-view-agenda-glasses-pencil.jpg?alt=media&token=6d98d4f5-3af6-4783-8899-9d27ba93abdc')",
       }}
     >
      
@@ -100,7 +100,7 @@ export default function DashProfile() {
       <div className="flex justify-center items-center min-h-screen relative z-10">
         <div className="  p-8 rounded-xl shadow-lg max-w-3xl w-full">
           <div className="text-center mb-6">
-            <h2 className="text-3xl font-semibold text-blue-950">User Profile</h2>
+            <h2 className="text-3xl font-semibold text-white">My Profile</h2>
           </div>
           
                     
@@ -109,7 +109,7 @@ export default function DashProfile() {
             <div className="flex gap-6">
               {/* Username Field */}
               <div className="flex-1">
-                <label htmlFor="username" className="block text-sm font-medium text-black">
+                <label htmlFor="username" className="block text-sm font-medium text-white">
                   Username
                 </label>
                 <input
@@ -123,7 +123,7 @@ export default function DashProfile() {
               
               {/* Email Field */}
               <div className="flex-1">
-                <label htmlFor="email" className="block text-sm font-medium text-black">
+                <label htmlFor="email" className="block text-sm font-medium text-white">
                   Email
                 </label>
                 <input
@@ -138,7 +138,7 @@ export default function DashProfile() {
             <div className="flex gap-[150px]">
             {/* Password Field */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-black">
+              <label htmlFor="password" className="block text-sm font-medium text-white">
                 Password
               </label>
               <input
@@ -152,16 +152,22 @@ export default function DashProfile() {
 
              {/* Username Field */}
              <div className="flex-1">
-                <label htmlFor="telephone" className="block text-sm font-medium text-black">
-                  telephone
+            
+                <label htmlFor="telephone" className="block text-sm font-medium text-white">
+                  Gender
                 </label>
-                <input
-                  type="text"
-                  id="telephone"
-                  defaultValue={currentUser.telephone}
-                  onChange={handleChange}
-                  className="mt-2 p-4  rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
+                <select
+                name="Gender"
+                id="Gender"
+                onChange={handleChange}
+                defaultValue={currentUser.Gender}
+                className="mt-2 p-4  rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              >
+                <option value="">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
               </div>
               
 
@@ -174,7 +180,7 @@ export default function DashProfile() {
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none"
+                className="bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none"
               >
                 {updateUserSuccess ? (
                   <span>{updateUserSuccess}</span>
@@ -198,7 +204,7 @@ export default function DashProfile() {
           <div className="flex justify-center mt-8">
             <button
               onClick={handleDeleteAccount}
-              className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300"
+              className="bg-red-900 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300"
               disabled={deleting}
             >
               {deleting ? "Deleting..." : "Delete Account"}

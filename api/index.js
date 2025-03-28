@@ -4,6 +4,8 @@ import cors from 'cors';
 import dotenv from "dotenv";
 import auth from './routes/auth.route.js';
 import Note from './routes/note.js';
+import ord from './routes/image.route.js';
+
 
 
 
@@ -31,6 +33,7 @@ app.listen(3000, () => {
 
 app.use('/api/auth', auth);
 app.use('/api/note', Note);
+app.use('/api/reco', ord);
 
 
 

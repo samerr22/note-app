@@ -99,7 +99,7 @@ export default function Update() {
          className="relative w-full h-[900px] bg-cover bg-center"
          style={{
            backgroundImage:
-             "url(https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/vintage-old-rustic-cutlery-dark_1220-4886.jpg?alt=media&token=d9c24b0f-4046-4e50-ab02-2ca7d6ae8cba)"
+             "url(https://firebasestorage.googleapis.com/v0/b/fir-8506f.appspot.com/o/top-view-agenda-glasses-pencil.jpg?alt=media&token=6d98d4f5-3af6-4783-8899-9d27ba93abdc)"
          }}
        >
          {/* Overlay for better text visibility */}
@@ -108,7 +108,7 @@ export default function Update() {
          <div className="relative z-10 flex items-center justify-center h-full">
            <div className="flex flex-col items-center w-full max-w-md space-y-6 mt-10  bg-opacity-50 bg-gray-800 p-8 rounded-xl shadow-lg opacity-90">
              <h1 className="text-3xl font-bold text-center text-white">
-               Update user
+               Update User
              </h1>
             
              
@@ -183,7 +183,7 @@ export default function Update() {
               
                <button
                  type="submit"
-                 className="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                 className="w-full p-3 bg-blue-900 text-white rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                >
                  Submit
                </button>
