@@ -25,6 +25,18 @@ export default function BAdd() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+
+     // Custom validation for content
+  if (!formData.title.trim()) {
+    setPublishError("Title is required.");
+    return;
+  }
+  if (!formData.content.trim()) {
+    setPublishError("Content is required.");
+    return;
+  }
+  
     try {
       const detail = {
         ...formData,
@@ -111,6 +123,7 @@ export default function BAdd() {
                 onChange={handleContentChange}
                 className="w-full p-3  bg-gray-100 bg-opacity-80 text-black border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500"
                 placeholder="Write your article content here..."
+                required
               />
             </div>
 
